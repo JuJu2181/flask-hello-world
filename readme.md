@@ -8,9 +8,11 @@ oc new-app --name=flask-hello-world python:3.12.0-slim~https://github.com/JuJu21
 
 oc expose pod flask-hello-world-7f49bc6f9f-qmfck --port=5000 --name=flask-hello-world-service
 
-oc create route edge --service=flask-hello-world-service --port=5000 
+oc create route edge --service=flask-hello-world --port=5000 
 
-oc create service clusterip flask-hello-world-service --tcp=5000:5000 --selector=deployment=flask-hello-world
+oc create service clusterip flask-hello-world-service --tcp=5000:5000
+
+oc expose deploy/flask-hello-world --port=5000
 
 oc delete all -l app=flask-hello-world
 oc delete route flask-hello-world
